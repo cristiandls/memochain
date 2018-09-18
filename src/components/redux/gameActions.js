@@ -4,6 +4,7 @@ export const CHECK_MATCHED_PAIR = 'CHECK_MATCHED_PAIR';
 export const MARK_PAIR_AS_MATCHED = 'MARK_PAIR_AS_MATCHED';
 export const FLIP_DOWN_PAIR = 'FLIP_DOWN_PAIR';
 export const INIT_GAME = 'INIT_GAME';
+export const MY_FLIP_CARDS = 'MY_FLIP_CARDS';
 
 export function initGame() {
   return { type: INIT_GAME };
@@ -26,4 +27,8 @@ export function flipUpCard(id) {
 
 export function shuffleCards() {
   return { type: SHUFFLE_CARDS };
+}
+
+export function myFlipCards() {
+  return { type: MY_FLIP_CARDS };
 }

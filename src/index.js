@@ -1,14 +1,15 @@
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import logger from 'redux-logger';
 import gameReducer from './components/redux/gameReducer';
 import { shuffleCards } from './components/redux/gameActions';
 import App from './components/App';
 
 // Crear store
-const store = createStore(gameReducer);
+const store = createStore(gameReducer, applyMiddleware(logger));
 
 // Mezclar fichas por primera vez
 store.dispatch(shuffleCards());
