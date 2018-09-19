@@ -2,30 +2,60 @@ import React, { Component } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { renderBoard, renderStatus } from './utils/boardUtils';
-import { flipUpCard, checkMatchedPair, initGame, myFlipCards } from './redux/gameActions';
+import { flipUpCard, checkMatchedPair, initGame, myFlipCards, startTimer, tickTimer } from './redux/gameActions';
 import Layout from './Layout';
 import './MemoGame.css';
 
 class Game extends Component {
 
-  // componentWillMount() {
-  //   setInterval(this.props.onCheckForMatchedPair, 2000);
-  // }
+  onCardClickWrapper(id) {
+
+    // Despachar la acción de tarjeta cliqueada
+    this.props.onCardClicked(id);
+
+    // Si el timer está inactivo
+    if (!this.props.isOn) {
+
+      // Activar el timer
+      this.props.onStartTimer(Date.now());
+
+      // Empezar a contar
+      interval = setInterval(() => {
+
+        // Empezar a contar
+        this.props.onTickTimer(Date.now());
+
+      }, 1000)
+    }
+
+  }
 
   render() {
-    const { gameComplete, turnNo, onPlayAgain, pairsFound, cards, onCardClicked } = this.props;
+    const { gameComplete, turnNo, onPlayAgain, pairsFound,
+      cards, isOn, time } = this.props;
+
+    // Si el timer está inactivo
+    if (!this.props.isOn) {
+      clearInterval(interval);
+    }
+
+    // Si se completó el juego detener el timer
+    if (gameComplete) {
+      clearInterval(interval);
+    }
+
     return (
       <Layout>
-        <Container fluid>
+        <Container>
           <Grid columns={3} divided>
-            {renderStatus(gameComplete, turnNo, onPlayAgain, pairsFound)}
+            {renderStatus(gameComplete, turnNo, onPlayAgain, pairsFound, isOn, time)}
           </Grid>
           <Grid columns={10}>
             <Grid.Row>
-              {renderBoard(1, cards, onCardClicked)}
+              {renderBoard(1, cards, this.onCardClickWrapper.bind(this))}
             </Grid.Row>
             <Grid.Row>
-              {renderBoard(2, cards, onCardClicked)}
+              {renderBoard(2, cards, this.onCardClickWrapper.bind(this))}
             </Grid.Row>
           </Grid>
         </Container>
@@ -34,13 +64,18 @@ class Game extends Component {
   }
 };
 
+let interval = null;
+
 const mapStateToProps = state => {
+
   return {
     numClicksWithinTurn: state.numClicksWithinTurn,
     cards: state.cards,
     turnNo: state.turnNo,
     gameComplete: state.gameComplete,
-    pairsFound: state.pairsFound
+    pairsFound: state.pairsFound,
+    isOn: state.isOn,
+    time: state.time
   }
 }
 
@@ -62,6 +97,12 @@ const mapDispatchToProps = dispatch => {
     },
     onPlayAgain: () => {
       dispatch(initGame());
+    },
+    onStartTimer: (offset) => {
+      dispatch(startTimer(offset));
+    },
+    onTickTimer: (time) => {
+      dispatch(tickTimer(time));
     }
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label, Grid, Button, Icon } from 'semantic-ui-react';
+import { Label, Grid, Button, Icon, Rating, Divider } from 'semantic-ui-react';
 import CardView from '../CardView';
 
 const renderBoard = (lineNo, cards, onCardClicked) => {
@@ -44,7 +44,7 @@ const renderBoard = (lineNo, cards, onCardClicked) => {
   return board;
 }
 
-const renderStatus = (gameComplete, turnNo, onPlayAgain, pairsFound) => {
+const renderStatus = (gameComplete, turnNo, onPlayAgain, pairsFound, isOn, time) => {
 
   // Si completó el juego
   if (gameComplete) {
@@ -57,7 +57,7 @@ const renderStatus = (gameComplete, turnNo, onPlayAgain, pairsFound) => {
         </Grid.Column>
         <Grid.Column>
           <Label as='a' color='yellow' size="big">
-            No ingresaste en el TOP10
+            Tu tiempo fué de {parseInt(time / 1000)} segungos
           </Label>
         </Grid.Column>
         <Grid.Column>
@@ -73,14 +73,17 @@ const renderStatus = (gameComplete, turnNo, onPlayAgain, pairsFound) => {
   return (
     <Grid.Row>
       <Grid.Column>
-        <Label as='a' color='red' size="big" pointing='right'>Cantidad de intentos:</Label>
-        <span>{turnNo}</span>
+        <Label as='h1' color='red' size="massive">Cantidad de intentos:</Label>
+        <span><h1>{turnNo}</h1></span>
       </Grid.Column>
       <Grid.Column>
-        <Label as='a' color='green' size="big" pointing='right'>Aciertos:</Label>
-        <span>{pairsFound}</span>
+        <Label as='h1' color='green' size="massive">Aciertos:</Label>
+        <Rating icon='star' size="massive" rating={pairsFound} maxRating={10} disabled />
       </Grid.Column>
       <Grid.Column>
+        <Label as='h2' color='blue' size="massive">Tiempo:</Label>
+        <span><h1>{parseInt(time / 1000)}</h1></span>
+        <Divider vertical={false} />
         <Button size="big" color='orange' onClick={onPlayAgain}>
           <Icon name='refresh' /> Reiniciar
         </Button>

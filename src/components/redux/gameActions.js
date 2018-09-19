@@ -5,6 +5,9 @@ export const MARK_PAIR_AS_MATCHED = 'MARK_PAIR_AS_MATCHED';
 export const FLIP_DOWN_PAIR = 'FLIP_DOWN_PAIR';
 export const INIT_GAME = 'INIT_GAME';
 export const MY_FLIP_CARDS = 'MY_FLIP_CARDS';
+export const START_TIMER = 'START_TIMER';
+export const STOP_TIMER = 'STOP_TIMER';
+export const TICK_TIMER = 'TICK_TIMER';
 
 export function initGame() {
   return { type: INIT_GAME };
@@ -31,4 +34,16 @@ export function shuffleCards() {
 
 export function myFlipCards() {
   return { type: MY_FLIP_CARDS };
+}
+
+export function startTimer(offset) {
+  return { type: START_TIMER, offset: offset };
+}
+
+export function stopTimer() {
+  return { type: STOP_TIMER };
+}
+
+export function tickTimer(time) {
+  return { type: TICK_TIMER, time: time }
 }

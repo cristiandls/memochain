@@ -1,7 +1,9 @@
 import {
-  FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_MATCHED_PAIR, markPairAsMatched,
-  MARK_PAIR_AS_MATCHED, MY_FLIP_CARDS, flipDownPair, FLIP_DOWN_PAIR, INIT_GAME,
-  shuffleCards, myFlipCards, checkMatchedPair, flipUpCard
+  FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_MATCHED_PAIR, MARK_PAIR_AS_MATCHED,
+  MY_FLIP_CARDS, FLIP_DOWN_PAIR, INIT_GAME, START_TIMER,
+  STOP_TIMER, TICK_TIMER, shuffleCards, myFlipCards,
+  checkMatchedPair, flipUpCard, flipDownPair, markPairAsMatched,
+  stopTimer
 } from "./gameActions";
 import shuffle from 'shuffle-array';
 import { NUM_IMAGES, generateCardSet, getCard, cardsHaveIdenticalImages } from '../cardFunctions';
@@ -13,7 +15,9 @@ const initialState = {
   firstId: undefined,
   secondId: undefined,
   gameComplete: false,
-  cards: generateCardSet()
+  cards: generateCardSet(),
+  isOn: false,
+  time: 0
 };
 
 // Reducer para el array de cartas
@@ -101,6 +105,36 @@ function gameReducer(state = initialState, action) {
   // Evaluar la acción despachada
   switch (action.type) {
 
+    // Iniciar timer
+    case START_TIMER:
+
+      // Si el timer ya se inició
+      if (state.isOn) {
+        return
+      }
+
+      return {
+        ...state,
+        isOn: true,
+        offset: action.offset,
+      };
+
+    // Incrementar timer
+    case TICK_TIMER:
+      return {
+        ...state,
+        time: state.time + (action.time - state.offset),
+        offset: action.time
+      };
+
+    // Detener timer
+    case STOP_TIMER:
+      return {
+        ...state,
+        isOn: false,
+        time: state.time
+      };
+
     // Esta acción se despacharía un par de segundos después 
     case MY_FLIP_CARDS:
 
@@ -138,6 +172,13 @@ function gameReducer(state = initialState, action) {
           gameComplete = true;
         }
 
+        let stateTimer = state;
+
+        // Si se completó el juego
+        if (gameComplete) {
+          stateTimer = gameReducer(state, stopTimer());
+        }
+
         // Devolver el state
         // 1. Devolver incrementada la cantidad de coincidencias
         // 2. Incrementar los turnos utilizados 
@@ -145,7 +186,7 @@ function gameReducer(state = initialState, action) {
         // 4. Setear el indicador de juego completo 
         // 5. Marcar el par de cartas como ya descubiertas
         return {
-          ...state,
+          ...stateTimer,
           pairsFound: pairsFound,
           turnNo: state.turnNo + 1,
           numClicksWithinTurn: 0,
