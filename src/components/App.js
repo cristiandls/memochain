@@ -4,6 +4,7 @@ import importedComponent from 'react-imported-component';
 
 import Home from './Home';
 import Loading from './Loading';
+import MemoGame from './MemoGame';
 
 const AsyncMemoGame = importedComponent(() => import('./MemoGame'), { LoadingComponent: Loading });
 const AsyncNoMatch = importedComponent(() => import('./NoMatch'), { LoadingComponent: Loading });
@@ -13,8 +14,10 @@ const App = () => {
     <Router>
       <div>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/memogame" component={AsyncMemoGame} />
+          <Route exact path="/" component={MemoGame} />
+          {
+            //<Route exact path="/memogame" component={AsyncMemoGame} />
+          }
           <Route component={AsyncNoMatch} />
         </Switch>
       </div>

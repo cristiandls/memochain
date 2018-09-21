@@ -1,10 +1,76 @@
 import React, { Component } from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux'
-import { renderBoard, renderStatus } from './utils/boardUtils';
 import { flipUpCard, checkMatchedPair, initGame, myFlipCards, startTimer, tickTimer } from './redux/gameActions';
 import Layout from './Layout';
+import { RankingList } from './RankingList';
+import { MenuGame } from './MenuGame';
+import { Board } from './Board';
+import { BlockchainForm } from './BlockchainForm';
 import './MemoGame.css';
+
+const top10List = [
+  {
+    name: 'Juan Pablo Dunda',
+    mail: 'juan.dunda@neoris.com',
+    attemps: 25,
+    time: 346
+  },
+  {
+    name: 'Cristian Lombardi',
+    mail: 'cristian.lombardi@neoris.com',
+    attemps: 44,
+    time: 324
+  },
+  {
+    name: 'Cristian de la Sota',
+    mail: 'cristian.delasota@neoris.com',
+    attemps: 45,
+    time: 333
+  },
+  {
+    name: 'César Rodriguez',
+    mail: 'cesar.rodriguez@neoris.com',
+    attemps: 51,
+    time: 366
+  },
+  {
+    name: 'Mariano Vitelli',
+    mail: 'mariano.vitelli@neoris.com',
+    attemps: 51,
+    time: 390
+  },
+  {
+    name: 'Federico Andrés Leveratto',
+    mail: 'federico.leveratto@neoris.com',
+    attemps: 88,
+    time: 1027
+  },
+  {
+    name: 'Facundo Correa',
+    mail: 'facundo.correa@neoris.com',
+    attemps: 99,
+    time: 340
+  },
+  {
+    name: 'Nicolás Domratschejew',
+    mail: 'nicolas.domratschejew@neoris.com',
+    attemps: 111,
+    time: 155
+  },
+  {
+    name: 'Martín Gastón Borda',
+    mail: 'martin.borda@neoris.com',
+    attemps: 112,
+    time: 201
+  },
+  {
+    name: 'Juan Pablo Mercol',
+    mail: 'juan.mercol@neoris.com',
+    attemps: 146,
+    time: 299
+  }
+]
 
 class Game extends Component {
 
@@ -19,7 +85,7 @@ class Game extends Component {
       // Activar el timer
       this.props.onStartTimer(Date.now());
 
-      // Empezar a contar
+      // Setear el intervalor cada 1 segundo
       interval = setInterval(() => {
 
         // Empezar a contar
@@ -31,43 +97,47 @@ class Game extends Component {
   }
 
   render() {
-    const { gameComplete, turnNo, onPlayAgain, pairsFound,
-      cards, isOn, time } = this.props;
-
-    // Si el timer está inactivo
-    if (!this.props.isOn) {
+    const { gameComplete, turnNo, onPlayAgain, pairsFound, cards, isOn, time } = this.props;
+    if (!isOn || gameComplete) {
       clearInterval(interval);
     }
 
-    // Si se completó el juego detener el timer
+    let mainComponent;
     if (gameComplete) {
-      clearInterval(interval);
+      mainComponent = <BlockchainForm turnNo={turnNo} time={time} onCancel={onPlayAgain} />
+    } else {
+      mainComponent = <Board cards={cards} onCardClicked={this.onCardClickWrapper.bind(this)} />;
     }
-
     return (
       <Layout>
-        <Container>
-          <Grid columns={3} divided>
-            {renderStatus(gameComplete, turnNo, onPlayAgain, pairsFound, isOn, time)}
-          </Grid>
-          <Grid columns={10}>
-            <Grid.Row>
-              {renderBoard(1, cards, this.onCardClickWrapper.bind(this))}
-            </Grid.Row>
-            <Grid.Row>
-              {renderBoard(2, cards, this.onCardClickWrapper.bind(this))}
-            </Grid.Row>
-          </Grid>
-        </Container>
+        <Grid celled='internally'>
+          <Grid.Row>
+            <Grid.Column width={11}>
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column width={16}>
+                    <MenuGame turnNo={turnNo} pairsFound={pairsFound} time={time} onPlayAgain={onPlayAgain} />
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Column width={16}>
+                  <Grid.Row>{mainComponent}</Grid.Row>
+                </Grid.Column>
+              </Grid>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <RankingList top10List={top10List} />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Layout>
     );
   }
 };
 
 let interval = null;
+let timeOutCheck;
 
 const mapStateToProps = state => {
-
   return {
     numClicksWithinTurn: state.numClicksWithinTurn,
     cards: state.cards,
@@ -78,9 +148,6 @@ const mapStateToProps = state => {
     time: state.time
   }
 }
-
-// var timeOutCheck;
-let timeOutCheck;
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -107,6 +174,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const MemoGame = connect(mapStateToProps, mapDispatchToProps)(Game)
-
-export default MemoGame;
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
