@@ -4,7 +4,7 @@ import CardView from './CardView';
 
 const Board = ({ cards, onCardClicked }) => {
   return (
-    <Grid columns={5}>
+    <Grid doubling columns={5}>
       {
         cards.map((card, index) => {
           return (

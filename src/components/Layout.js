@@ -4,26 +4,22 @@ import logo from './images/logo.png';
 
 const Layout = ({ children }) => {
   return (
-    <Container>
-      <div>
-        <Menu inverted>
-          <Container >
-            <Menu.Item as='a' header>
-              <Image size='small' src={logo} style={{ marginRight: '1.5em' }} />
-              Juegos en blockchain - MemoChain
+    <div>
+      <Menu inverted stackable>
+        <Container >
+          <Menu.Item as='a' header >
+            <Image size='small' src={logo} style={{ marginRight: '1.5em' }} />
+            Juegos en blockchain - MemoChain
             </Menu.Item>
-            <Menu.Menu position='right'>
-              <Menu.Item name='contract' header>
-                <a style={{ color: 'white' }} href="https://ropsten.etherscan.io/address/0xbd15fcb70a610dd914eed4afdf36930fd716924f" target="_blank">Ver contrato: 0xbd15fcb70a610dd914eed4afdf36930fd716924f</a>
-              </Menu.Item>
-            </Menu.Menu>
-          </Container>
-        </Menu>
-        <Container>
-          {children}
+          <Menu.Menu position='right'>
+            <Menu.Item name='contract' header>
+              <a style={{ color: 'white' }} href="https://ropsten.etherscan.io/address/0xbd15fcb70a610dd914eed4afdf36930fd716924f" target="_blank">Ver contrato: 0xbd15fcb70a610dd914eed4afdf36930fd716924f</a>
+            </Menu.Item>
+          </Menu.Menu>
         </Container>
-      </div>
-    </Container>
+      </Menu>
+      {children}
+    </div>
   );
 };
 

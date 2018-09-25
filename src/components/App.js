@@ -12,15 +12,13 @@ const AsyncNoMatch = importedComponent(() => import('./NoMatch'), { LoadingCompo
 const App = () => {
   return (
     <Router>
-      <div>
-        <Switch>
-          <Route exact path="/" component={MemoGame} />
-          {
-            //<Route exact path="/memogame" component={AsyncMemoGame} />
-          }
-          <Route component={AsyncNoMatch} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={MemoGame} />
+        {
+          //<Route exact path="/memogame" component={AsyncMemoGame} />
+        }
+        <Route component={AsyncNoMatch} />
+      </Switch>
     </Router>
   );
 };

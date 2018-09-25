@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Message, Button } from 'semantic-ui-react';
 
 const BlockchainForm = ({ turnNo, time, onCancel }) => {
-  const text = `Ganaste en ${turnNo} intentos y un tiempo de ${time} segundos! Registra tu puntaje en la Blockchain de Ethereum`
+  const text = `Ganaste en ${turnNo} intentos y un tiempo de ${parseInt(time / 1000)} segundos! Registra tu puntaje en la Blockchain de Ethereum`
   return (
     <Form success>
       <Message success header='Felicitaciones' content={text} />

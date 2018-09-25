@@ -9,6 +9,7 @@ import { Board } from './Board';
 import { BlockchainForm } from './BlockchainForm';
 import './MemoGame.css';
 
+//#region borrar
 const top10List = [
   {
     name: 'Juan Pablo Dunda',
@@ -71,6 +72,7 @@ const top10List = [
     time: 299
   }
 ]
+//#endregion borrar
 
 class Game extends Component {
 
@@ -110,19 +112,21 @@ class Game extends Component {
     }
     return (
       <Layout>
-        <Grid celled='internally'>
+        <Grid stackable columns={2} celled='internally'>
           <Grid.Row>
             <Grid.Column width={11}>
-              <Grid>
-                <Grid.Row>
+              <div>
+                <Grid>
+                  <Grid.Row>
+                    <Grid.Column width={16}>
+                      <MenuGame turnNo={turnNo} pairsFound={pairsFound} time={time} onPlayAgain={onPlayAgain} />
+                    </Grid.Column>
+                  </Grid.Row>
                   <Grid.Column width={16}>
-                    <MenuGame turnNo={turnNo} pairsFound={pairsFound} time={time} onPlayAgain={onPlayAgain} />
+                    <Grid.Row>{mainComponent}</Grid.Row>
                   </Grid.Column>
-                </Grid.Row>
-                <Grid.Column width={16}>
-                  <Grid.Row>{mainComponent}</Grid.Row>
-                </Grid.Column>
-              </Grid>
+                </Grid>
+              </div>
             </Grid.Column>
             <Grid.Column width={5}>
               <RankingList top10List={top10List} />
