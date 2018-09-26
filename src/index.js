@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
-import gameReducer from './components/redux/gameReducer';
-import { shuffleCards } from './components/redux/gameActions';
-import App from './components/App';
+import gameReducer from './redux/gameReducer';
+import { shuffleCards } from './redux/gameActions';
+import App from './pages/App';
 
 // Crear store
 const store = createStore(gameReducer, applyMiddleware(logger));
@@ -25,4 +25,4 @@ const render = Component =>
   );
 
 render(App);
-if (module.hot) module.hot.accept('./components/App', () => render(App));
+if (module.hot) module.hot.accept('./pages/App', () => render(App));

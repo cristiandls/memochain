@@ -13,7 +13,6 @@ const RankingList = ({ top10List }) => {
             } else {
               showIcon = null;
             }
-
             return (
               <List.Item key={index}>
                 <List.Content floated='left'>
@@ -33,4 +32,4 @@ const RankingList = ({ top10List }) => {
   );
 };
 
-export { RankingList };
+export default RankingList;

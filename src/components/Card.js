@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './MemoGame.css';
+import '../pages/MemoGame/MemoGame.css';
+
+const pathToCards = require.context('../images', true);
 
 class CardView extends Component {
   constructor(props) {
@@ -9,26 +11,26 @@ class CardView extends Component {
 
   onClick() {
     if (!this.props.matched && !this.props.imageUp) {
-      this.props.onClick(this.props.id);      
+      this.props.onClick(this.props.id);
     }
   }
 
   render() {
-    let imPath = './images/';
+    let imPath;
     if (this.props.imageUp) {
-      imPath = imPath + this.props.image + '.jpg';
+      imPath = this.props.image + '.jpg';
     } else {
-      imPath = imPath + 'back.jpg';
+      imPath = 'back.jpg';
     }
 
-    let className='Card';
+    let className = 'Card';
     if (this.props.matched) {
       className = className + ' Matched';
     }
 
     return (
-        <img className={className} src={require(`${imPath}`)} alt='' onClick={this.onClick}/>
-    );      
+      <img className={className} src={pathToCards('./' + imPath)} alt='' onClick={this.onClick} />
+    );
   };
 };
 

@@ -14,4 +14,4 @@ const MenuGame = ({ turnNo, pairsFound, time, onPlayAgain }) => {
   );
 };
 
-export { MenuGame };
+export default MenuGame;

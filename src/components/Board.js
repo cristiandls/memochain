@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import CardView from './CardView';
+import Card from './Card';
 
 const Board = ({ cards, onCardClicked }) => {
   return (
@@ -9,7 +9,7 @@ const Board = ({ cards, onCardClicked }) => {
         cards.map((card, index) => {
           return (
             <Grid.Column key={index}>
-              <CardView
+              <Card
                 key={index}
                 id={card.id}
                 image={card.image}
@@ -25,4 +25,4 @@ const Board = ({ cards, onCardClicked }) => {
   );
 };
 
-export { Board };
+export default Board;

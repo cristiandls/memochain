@@ -13,4 +13,4 @@ const BlockchainForm = ({ turnNo, time, onCancel }) => {
   );
 };
 
-export { BlockchainForm };
+export default BlockchainForm;

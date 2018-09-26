@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux'
-import { flipUpCard, checkMatchedPair, initGame, myFlipCards, startTimer, tickTimer } from './redux/gameActions';
-import Layout from './Layout';
-import { RankingList } from './RankingList';
-import { MenuGame } from './MenuGame';
-import { Board } from './Board';
-import { BlockchainForm } from './BlockchainForm';
+import { flipUpCard, checkMatchedPair, initGame, myFlipCards, startTimer, tickTimer } from '../../redux/gameActions';
+import Layout from '../Layout';
+import { RankingList, MenuGame, Board, BlockchainForm } from '../../components/';
 import './MemoGame.css';
 
 //#region borrar

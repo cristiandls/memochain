@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Container, Image } from 'semantic-ui-react';
-import logo from './images/logo.png';
+import logo from '../../images/logo.png';
 
 const Layout = ({ children }) => {
   return (

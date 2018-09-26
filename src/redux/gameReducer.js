@@ -6,7 +6,7 @@ import {
   stopTimer
 } from "./gameActions";
 import shuffle from 'shuffle-array';
-import { NUM_IMAGES, generateCardSet, getCard, cardsHaveIdenticalImages } from '../cardFunctions';
+import { NUM_IMAGES, generateCardSet, getCard, cardsHaveIdenticalImages } from '../utils/CardUtils';
 
 const initialState = {
   turnNo: 1,
