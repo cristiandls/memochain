@@ -4,7 +4,7 @@ import Card from './Card';
 
 const Board = ({ cards, onCardClicked }) => {
   return (
-    <Grid doubling columns={5}>
+    <Grid doubling columns={6}>
       {
         cards.map((card, index) => {
           return (

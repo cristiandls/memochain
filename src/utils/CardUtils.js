@@ -1,22 +1,22 @@
-export const NUM_IMAGES = 10;
+export const NUM_IMAGES = 12;
 
 export function generateCardSet() {
   //
   // Generate a set of cards with image pairs
   //
   let cards = [];
-  let id=1;
-  for(let i=1; i <= NUM_IMAGES; i++) {
+  let id = 1;
+  for (let i = 1; i <= NUM_IMAGES; i++) {
     let card1 = {
       id: id,
-      image : i,
+      image: i,
       imageUp: false,
       matched: false
     };
     id++;
     let card2 = {
       id: id,
-      image : i,
+      image: i,
       imageUp: false,
       matched: false
     };
@@ -29,7 +29,7 @@ export function generateCardSet() {
 };
 
 export function getCard(id, cards) {
-  for(let i=0; i < 2*NUM_IMAGES; i++) {
+  for (let i = 0; i < 2 * NUM_IMAGES; i++) {
     if (cards[i].id === id) {
       return cards[i];
     }
