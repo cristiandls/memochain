@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux'
-import { flipUpCard, checkMatchedPair, initGame, myFlipCards, startTimer, tickTimer } from '../../redux/gameActions';
+import { flipUpCard, checkMatchedPair, initGame, myFlipCards, startTimer, tickTimer } from '../../actions/gameActions';
+import { sendTrx } from '../../actions/web3Actions';
 import Layout from '../Layout';
 import { RankingList, MenuGame, Board, BlockchainForm } from '../../components/';
 import './MemoGame.css';
@@ -96,14 +97,14 @@ class Game extends Component {
   }
 
   render() {
-    const { gameComplete, turnNo, onPlayAgain, pairsFound, cards, isOn, time } = this.props;
+    const { gameComplete, turnNo, onPlayAgain, pairsFound, cards, isOn, time, onSendTrx } = this.props;
     if (!isOn || gameComplete) {
       clearInterval(interval);
     }
 
     let mainComponent;
     if (gameComplete) {
-      mainComponent = <BlockchainForm turnNo={turnNo} time={time} onCancel={onPlayAgain} />
+      mainComponent = <BlockchainForm turnNo={turnNo} time={time} onCancel={onPlayAgain} onSubmit={onSendTrx} />
     } else {
       mainComponent = <Board cards={cards} onCardClicked={this.onCardClickWrapper.bind(this)} />;
     }
@@ -140,13 +141,14 @@ let timeOutCheck;
 
 const mapStateToProps = state => {
   return {
-    numClicksWithinTurn: state.numClicksWithinTurn,
-    cards: state.cards,
-    turnNo: state.turnNo,
-    gameComplete: state.gameComplete,
-    pairsFound: state.pairsFound,
-    isOn: state.isOn,
-    time: state.time
+    numClicksWithinTurn: state.gameReducer.numClicksWithinTurn,
+    cards: state.gameReducer.cards,
+    turnNo: state.gameReducer.turnNo,
+    gameComplete: state.gameReducer.gameComplete,
+    pairsFound: state.gameReducer.pairsFound,
+    isOn: state.gameReducer.isOn,
+    time: state.gameReducer.time,
+    web3: state.web3Reducer.web3
   }
 }
 
@@ -171,6 +173,9 @@ const mapDispatchToProps = dispatch => {
     },
     onTickTimer: (time) => {
       dispatch(tickTimer(time));
+    },
+    onSendTrx: (name, email, times, attemps) => {
+      dispatch(sendTrx(name, email, times, attemps));
     }
   }
 }

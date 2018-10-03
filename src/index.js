@@ -4,15 +4,20 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
-import gameReducer from './redux/gameReducer';
-import { shuffleCards } from './redux/gameActions';
+import thunk from 'redux-thunk';
+import reducers from './reducers';
+import { shuffleCards } from './actions/gameActions';
+import { initWeb3 } from './actions/web3Actions';
 import App from './pages/App';
 
 // Crear store
-const store = createStore(gameReducer, applyMiddleware(logger));
+const store = createStore(reducers, applyMiddleware(thunk, logger));
 
 // Mezclar fichas por primera vez
 store.dispatch(shuffleCards());
+
+// Inicializar web3 y obtener el contrato
+store.dispatch(initWeb3());
 
 const render = Component =>
   ReactDOM.render(

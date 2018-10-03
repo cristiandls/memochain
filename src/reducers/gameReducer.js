@@ -4,7 +4,7 @@ import {
   STOP_TIMER, TICK_TIMER, shuffleCards, myFlipCards,
   checkMatchedPair, flipUpCard, flipDownPair, markPairAsMatched,
   stopTimer
-} from "./gameActions";
+} from "../actions/gameActions";
 import shuffle from 'shuffle-array';
 import { NUM_IMAGES, generateCardSet, getCard, cardsHaveIdenticalImages } from '../utils/CardUtils';
 
@@ -100,7 +100,7 @@ function cardsState(state = [], action) {
 }
 
 // Reducer para el juego
-function gameReducer(state = initialState, action) {
+export const gameReducer = (state = initialState, action) => {
 
   // Evaluar la acción despachada
   switch (action.type) {
@@ -260,5 +260,3 @@ function gameReducer(state = initialState, action) {
       return state;
   }
 }
-
-export default gameReducer;
