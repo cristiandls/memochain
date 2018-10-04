@@ -22,7 +22,6 @@ export const getRanking = () => async (dispatch, getState) => {
 
     // Ranking
     const top10List = buildRanking(web3, result);
-    console.log("juanaaaaaaaaa", top10List);
 
     dispatch(setRankingtop10List(top10List));
 
