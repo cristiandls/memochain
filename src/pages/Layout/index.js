@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
             </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item name='contract' header>
-              <a style={{ color: 'white' }} href="https://ropsten.etherscan.io/address/0xbd15fcb70a610dd914eed4afdf36930fd716924f" target="_blank">Ver contrato: 0xbd15fcb70a610dd914eed4afdf36930fd716924f</a>
+              <a style={{ color: 'white' }} href="https://ropsten.etherscan.io/address/0xfd8a9874c2926b8f48096fbe736cefe935189fc0" target="_blank">Ver contrato: 0xfd8a9874c2926b8f48096fbe736cefe935189fc0</a>
             </Menu.Item>
           </Menu.Menu>
         </Container>

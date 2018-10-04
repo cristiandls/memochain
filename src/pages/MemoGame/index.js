@@ -2,77 +2,23 @@ import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { flipUpCard, checkMatchedPair, initGame, myFlipCards, startTimer, tickTimer } from '../../actions/gameActions';
-import { sendTrx } from '../../actions/web3Actions';
+import { sendTrx, getRanking } from '../../actions/web3Actions';
 import Layout from '../Layout';
 import { RankingList, MenuGame, Board, BlockchainForm } from '../../components/';
 import './MemoGame.css';
 
-//#region borrar
-const top10List = [
-  {
-    name: 'Juan Pablo Dunda',
-    mail: 'juan.dunda@neoris.com',
-    attemps: 25,
-    time: 346
-  },
-  {
-    name: 'Cristian Lombardi',
-    mail: 'cristian.lombardi@neoris.com',
-    attemps: 44,
-    time: 324
-  },
-  {
-    name: 'Cristian de la Sota',
-    mail: 'cristian.delasota@neoris.com',
-    attemps: 45,
-    time: 333
-  },
-  {
-    name: 'César Rodriguez',
-    mail: 'cesar.rodriguez@neoris.com',
-    attemps: 51,
-    time: 366
-  },
-  {
-    name: 'Mariano Vitelli',
-    mail: 'mariano.vitelli@neoris.com',
-    attemps: 51,
-    time: 390
-  },
-  {
-    name: 'Federico Andrés Leveratto',
-    mail: 'federico.leveratto@neoris.com',
-    attemps: 88,
-    time: 1027
-  },
-  {
-    name: 'Facundo Correa',
-    mail: 'facundo.correa@neoris.com',
-    attemps: 99,
-    time: 340
-  },
-  {
-    name: 'Nicolás Domratschejew',
-    mail: 'nicolas.domratschejew@neoris.com',
-    attemps: 111,
-    time: 155
-  },
-  {
-    name: 'Martín Gastón Borda',
-    mail: 'martin.borda@neoris.com',
-    attemps: 112,
-    time: 201
-  },
-  {
-    name: 'Juan Pablo Mercol',
-    mail: 'juan.mercol@neoris.com',
-    attemps: 146,
-    time: 299
-  }
-]
-//#endregion borrar
-
 class Game extends Component {
+
+  componentWillMount() {
+    //Setear timer cada 10 segundos
+    this.interval = setInterval(() => this.props.onGetRanking(), 10000);
+
+  }
+
+  componentWillUnmount() {
+    //Limpiar el timer
+    clearInterval(this.interval);
+  }
 
   onCardClickWrapper(id) {
 
@@ -97,7 +43,7 @@ class Game extends Component {
   }
 
   render() {
-    const { gameComplete, turnNo, onPlayAgain, pairsFound, cards, isOn, time, onSendTrx } = this.props;
+    const { gameComplete, turnNo, onPlayAgain, pairsFound, cards, isOn, time, onSendTrx, top10List } = this.props;
     if (!isOn || gameComplete) {
       clearInterval(interval);
     }
@@ -148,7 +94,8 @@ const mapStateToProps = state => {
     pairsFound: state.gameReducer.pairsFound,
     isOn: state.gameReducer.isOn,
     time: state.gameReducer.time,
-    web3: state.web3Reducer.web3
+    web3: state.web3Reducer.web3,
+    top10List: state.web3Reducer.top10List
   }
 }
 
@@ -176,6 +123,9 @@ const mapDispatchToProps = dispatch => {
     },
     onSendTrx: (name, email, times, attemps) => {
       dispatch(sendTrx(name, email, times, attemps));
+    },
+    onGetRanking: () => {
+      dispatch(getRanking());
     }
   }
 }

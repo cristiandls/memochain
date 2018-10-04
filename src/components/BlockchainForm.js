@@ -16,11 +16,7 @@ class BlockchainForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Nombre:", this.state.name);
-    console.log("Mail:", this.state.email);
-
     this.props.onSubmit(this.state.name, this.state.email, this.props.time, this.props.turnNo);
-
     this.setState({
       name: '',
       email: ''

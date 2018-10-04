@@ -1,9 +1,9 @@
 import Web3 from 'web3';
-import { GET_WEB3, GET_CONTRACT } from "../actions/web3Actions";
+import { GET_WEB3, GET_CONTRACT, GET_RANKING } from "../actions/web3Actions";
 import { contractAddress, abiArray, myAddress } from '../utils/ContractUtils';
 
 const initialState = {
-  plays: [],
+  top10List: [],
   web3: null,
   contract: null
 };
@@ -34,6 +34,13 @@ export const web3Reducer = (state = initialState, action) => {
         ...state,
         contract: contract
       };
+
+    case GET_RANKING:
+      return {
+        ...state,
+        top10List: action.payload
+      }
+
     // Si no es ninguna de las acciones anteriores
     default:
       return state;
