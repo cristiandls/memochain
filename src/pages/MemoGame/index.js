@@ -12,7 +12,7 @@ class Game extends Component {
   componentWillMount() {
     //Setear timer cada 10 segundos
     this.interval = setInterval(() => this.props.onGetRanking(), 10000);
-    console.log("Proccess envvvvvvvvv: ", process.env);
+    console.log("Proccess envvvvvvvvv: ", process.env.CONTRACT_ADDRESS);
   }
 
   componentWillUnmount() {
