@@ -1,5 +1,5 @@
 const commonPaths = require('./common-paths');
-
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -50,8 +50,8 @@ const config = {
       favicon: `public/favicon.ico`
     }),
     new Dotenv({
-      path: './.env'
-    }),
+      path: path.resolve(__dirname, '../.env')
+    })
   ]
 };
 
