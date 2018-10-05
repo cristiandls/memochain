@@ -49,7 +49,9 @@ const config = {
       template: `public/index.html`,
       favicon: `public/favicon.ico`
     }),
-    new Dotenv()
+    new Dotenv({
+      path: '../.env'
+    }),
   ]
 };
 
