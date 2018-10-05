@@ -2,6 +2,7 @@ const commonPaths = require('./common-paths');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: {
@@ -47,7 +48,8 @@ const config = {
     new HtmlWebpackPlugin({
       template: `public/index.html`,
       favicon: `public/favicon.ico`
-    })
+    }),
+    new Dotenv()
   ]
 };
 

@@ -18,4 +18,5 @@ console.log("Dirección del contrato", process.env.CONTRACT_ADDRESS);
 console.log("Key de infura", process.env.INFURA_API_KEY);
 console.log("Mi dirección", process.env.MY_ADDRESS);
 console.log("Mi clave privada", process.env.PRIVATE_KEY);
+console.log("Puerto", process.env.PORT);
 console.log('Server started!');
