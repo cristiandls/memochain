@@ -14,4 +14,5 @@ app.get('/*', function (req, res) {
 
 
 app.listen(port);
+console.log(process.env);
 console.log('Server started!');
