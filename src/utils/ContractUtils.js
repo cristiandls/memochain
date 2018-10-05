@@ -179,13 +179,16 @@ export const abiArray =
     }
   ];
 
-export const contractAddress = '0xfd8a9874c2926b8f48096fbe736cefe935189fc0';
+// export const contractAddress = '0xfd8a9874c2926b8f48096fbe736cefe935189fc0';
+export const contractAddress = process.env.CONTRACT_ADDRESS;
 
 export const myAddress = '0x3CB0A8Af4289384696Dd2E576d54149c4b2f599F';
 
 export const privateKey = Buffer.from('F7D0417D509D00CC54E77C7023C16B1F750F8FE6C9B5581436FA4191BE50C9BB', 'hex');
 
 export const buildRanking = (web3, result) => {
+
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", contractAddress);
 
   const allPlays = [];
 
