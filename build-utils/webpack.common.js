@@ -50,7 +50,7 @@ const config = {
       favicon: `public/favicon.ico`
     }),
     new Dotenv({
-      path: '../.env'
+      path: './.env'
     }),
   ]
 };
