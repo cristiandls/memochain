@@ -1,11 +1,9 @@
 import Web3 from 'web3';
-import { GET_WEB3, GET_CONTRACT, GET_RANKING } from "../actions/web3Actions";
-import { contractAddress, abiArray, myAddress } from '../utils/ContractUtils';
+import { GET_WEB3, GET_RANKING } from "../actions/web3Actions";
 
 const initialState = {
   top10List: [],
-  web3: null,
-  contract: null
+  web3: null
 };
 
 export const web3Reducer = (state = initialState, action) => {
@@ -20,19 +18,6 @@ export const web3Reducer = (state = initialState, action) => {
       return {
         ...state,
         web3: web3Instance,
-      };
-
-    // Obtener instancia del contrato
-    case GET_CONTRACT:
-      const web3 = state.web3;
-      const contract = new web3.eth.Contract(abiArray, contractAddress, {
-        from: myAddress,
-        gasPrice: '20000000000',
-        gas: 3000000
-      });
-      return {
-        ...state,
-        contract: contract
       };
 
     case GET_RANKING:
