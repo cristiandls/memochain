@@ -12,7 +12,7 @@ export const getRanking = () => async (dispatch, getState) => {
   // Obtener el web3
   const web3 = getState().web3Reducer.web3;
 
-  const apiUrl = process.env.API_URL || 'https://memochain.herokuapp.com/'
+  const apiUrl = process.env.API_URL || 'https://memochain.herokuapp.com'
 
   try {
 
@@ -66,7 +66,7 @@ export function setTrx(trx) {
 
 export const sendTrx = (name, email, time, attemps) => async (dispatch) => {
 
-  const apiUrl = process.env.API_URL || 'https://memochain.herokuapp.com/'
+  const apiUrl = process.env.API_URL || 'https://memochain.herokuapp.com'
 
   try {
 
