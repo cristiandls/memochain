@@ -10,7 +10,7 @@ exports.postBc = async (req, res) => {
   try {
 
     // Setear a infura como proveedor de los servicios de nodo
-    const provider = new Web3.providers.HttpProvider(process.env.BLOCKCHAIN_NETWORK + process.env.INFURA_API_KEY)
+    const provider = new Web3.providers.HttpProvider(process.env.INFURA_NETWORK + process.env.INFURA_API_KEY)
 
     // Crear una instancia del WEB3
     const web3Instance = new Web3(provider);
@@ -66,7 +66,7 @@ exports.getRanking = async (req, res) => {
   try {
 
     // Setear a infura como proveedor de los servicios de nodo
-    const provider = new Web3.providers.HttpProvider(process.env.BLOCKCHAIN_NETWORK + process.env.INFURA_API_KEY)
+    const provider = new Web3.providers.HttpProvider(process.env.INFURA_NETWORK + process.env.INFURA_API_KEY)
 
     // Crear una instancia del WEB3
     const web3Instance = new Web3(provider);
