@@ -15,7 +15,7 @@ export const web3Reducer = (state = initialState, action) => {
 
     // Obtener la conexión con WEB3
     case GET_WEB3:
-      const provider = new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/bdaca37a988e4283864a60e0bb1fa2eb")
+      const provider = new Web3.providers.HttpProvider(ENVAR_INFURA_NETWORK + ENVAR_INFURA_API_KEY)
       const web3Instance = new Web3(provider);
       return {
         ...state,

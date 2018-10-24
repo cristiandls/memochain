@@ -11,7 +11,7 @@ class Game extends Component {
 
   componentWillMount() {
     //Setear timer cada 10 segundos
-    this.interval = setInterval(() => this.props.onGetRanking(), 10000);
+    this.interval = setInterval(() => this.props.onGetRanking(), ENVAR_RANKING_REFRESH_TIME);
   }
 
   componentWillUnmount() {

@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
             </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item name='contract' header>
-              <a style={{ color: 'white' }} href="https://ropsten.etherscan.io/address/0xfd8a9874c2926b8f48096fbe736cefe935189fc0" target="_blank">Ver contrato: 0xfd8a9874c2926b8f48096fbe736cefe935189fc0</a>
+              <a style={{ color: 'white' }} href={ENVAR_BLOCKCHAIN_NETWORK + 'address/' + ENVAR_CONTRACT_ADDRESS} target="_blank">{'Ver contrato: ' + ENVAR_CONTRACT_ADDRESS}</a>
             </Menu.Item>
           </Menu.Menu>
         </Container>

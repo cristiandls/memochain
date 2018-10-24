@@ -2,7 +2,6 @@ const commonPaths = require('./common-paths');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: {
@@ -48,6 +47,14 @@ const config = {
     new HtmlWebpackPlugin({
       template: `public/index.html`,
       favicon: `public/favicon.ico`
+    }),
+    new webpack.DefinePlugin({
+      ENVAR_CONTRACT_ADDRESS: JSON.stringify(process.env.CONTRACT_ADDRESS),
+      ENVAR_API_URL: JSON.stringify(process.env.API_URL),
+      ENVAR_BLOCKCHAIN_NETWORK: JSON.stringify(process.env.BLOCKCHAIN_NETWORK),
+      ENVAR_INFURA_NETWORK: JSON.stringify(process.env.INFURA_NETWORK),
+      ENVAR_INFURA_API_KEY: JSON.stringify(process.env.INFURA_API_KEY),
+      ENVAR_RANKING_REFRESH_TIME: JSON.stringify(process.env.RANKING_REFRESH_TIME)
     })
   ]
 };

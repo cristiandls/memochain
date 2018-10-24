@@ -3,7 +3,6 @@ import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import importedComponent from 'react-imported-component';
 
 import Loading from './Loading';
-// import MemoGame from './MemoGame';
 
 const AsyncMemoGame = importedComponent(() => import('./MemoGame'), { LoadingComponent: Loading });
 const AsyncNoMatch = importedComponent(() => import('./NoMatch'), { LoadingComponent: Loading });

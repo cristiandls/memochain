@@ -8,7 +8,7 @@ class BlockchainTrx extends Component {
 
     // Si ya se creó la transacción
     if (bcTrx) {
-      const link = 'https://ropsten.etherscan.io/tx/' + bcTrx;
+      const link = ENVAR_BLOCKCHAIN_NETWORK + '/tx/' + bcTrx;
       return (
         <div>
           <Message icon>
