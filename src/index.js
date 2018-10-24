@@ -10,6 +10,13 @@ import { shuffleCards } from './actions/gameActions';
 import { initWeb3 } from './actions/web3Actions';
 import App from './pages/App';
 
+console.log('ENVAR_CONTRACT_ADDRESS', ENVAR_CONTRACT_ADDRESS);
+console.log('ENVAR_API_URL', ENVAR_API_URL);
+console.log('ENVAR_BLOCKCHAIN_NETWORK', ENVAR_BLOCKCHAIN_NETWORK);
+console.log('ENVAR_INFURA_NETWORK', ENVAR_INFURA_NETWORK);
+console.log('ENVAR_INFURA_API_KEY', ENVAR_INFURA_API_KEY);
+console.log('ENVAR_RANKING_REFRESH_TIME', ENVAR_RANKING_REFRESH_TIME);
+
 // Crear store
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 
