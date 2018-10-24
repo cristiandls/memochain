@@ -16,7 +16,7 @@ export const getRanking = () => async (dispatch, getState) => {
   try {
 
     // Obtener lista de la api
-    const res = await axios.get(ENVAR_API_URL + '/api/bc');
+    const res = await axios.get(ENVAR_API_URL + 'api/bc');
 
     // Ranking
     const top10List = buildRanking(web3, res.data.result);
@@ -76,7 +76,7 @@ export const sendTrx = (name, email, time, attemps) => async (dispatch) => {
 
   try {
 
-    const res = await axios.post(ENVAR_API_URL + '/api/bc', {
+    const res = await axios.post(ENVAR_API_URL + 'api/bc', {
       name,
       email,
       time,
