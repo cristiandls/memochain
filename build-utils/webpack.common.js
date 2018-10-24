@@ -48,9 +48,6 @@ const config = {
     new HtmlWebpackPlugin({
       template: `public/index.html`,
       favicon: `public/favicon.ico`
-    }),
-    new Dotenv({
-      path: path.resolve(__dirname, '../.env')
     })
   ]
 };
