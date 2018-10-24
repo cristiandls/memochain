@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { flipUpCard, checkMatchedPair, initGame, myFlipCards, startTimer, tickTimer } from '../../actions/gameActions';
-import { sendTrx, getRanking } from '../../actions/web3Actions';
+import { sendTrx, getRanking, setSubmitting } from '../../actions/web3Actions';
 import Layout from '../Layout';
-import { RankingList, MenuGame, Board, BlockchainForm } from '../../components/';
+import { RankingList, MenuGame, Board, BlockchainForm, BlockchainTrx } from '../../components/';
 import './MemoGame.css';
 
 class Game extends Component {
@@ -48,11 +48,17 @@ class Game extends Component {
     }
 
     let mainComponent;
-    if (gameComplete) {
-      mainComponent = <BlockchainForm turnNo={turnNo} time={time} onCancel={onPlayAgain} onSubmit={onSendTrx} />
+    // Si no se está esperando por la transacción 
+    if (!this.props.submitting) {
+      if (gameComplete) {
+        mainComponent = <BlockchainForm turnNo={turnNo} time={time} onCancel={onPlayAgain} onSubmit={onSendTrx} />
+      } else {
+        mainComponent = <Board cards={cards} onCardClicked={this.onCardClickWrapper.bind(this)} />;
+      }
     } else {
-      mainComponent = <Board cards={cards} onCardClicked={this.onCardClickWrapper.bind(this)} />;
+      mainComponent = <BlockchainTrx bcTrx={this.props.bcTrx} onCancel={onPlayAgain} />
     }
+
     return (
       <Layout>
         <Grid stackable columns={2} celled='internally'>
@@ -94,7 +100,9 @@ const mapStateToProps = state => {
     isOn: state.gameReducer.isOn,
     time: state.gameReducer.time,
     web3: state.web3Reducer.web3,
-    top10List: state.web3Reducer.top10List
+    top10List: state.web3Reducer.top10List,
+    submitting: state.web3Reducer.submitting,
+    bcTrx: state.web3Reducer.bcTrx
   }
 }
 
@@ -112,6 +120,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(checkMatchedPair());
     },
     onPlayAgain: () => {
+      dispatch(setSubmitting(false));
       dispatch(initGame());
     },
     onStartTimer: (offset) => {

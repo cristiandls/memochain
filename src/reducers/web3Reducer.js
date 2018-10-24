@@ -1,7 +1,9 @@
 import Web3 from 'web3';
-import { GET_WEB3, GET_RANKING } from "../actions/web3Actions";
+import { GET_WEB3, GET_RANKING, SET_TRX, SET_SUBMITTING } from "../actions/web3Actions";
 
 const initialState = {
+  submitting: false,
+  bcTrx: null,
   top10List: [],
   web3: null
 };
@@ -26,6 +28,17 @@ export const web3Reducer = (state = initialState, action) => {
         top10List: action.payload
       }
 
+    case SET_TRX:
+      return {
+        ...state,
+        bcTrx: action.payload
+      }
+
+    case SET_SUBMITTING:
+      return {
+        ...state,
+        submitting: action.payload
+      }
     // Si no es ninguna de las acciones anteriores
     default:
       return state;

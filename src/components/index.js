@@ -1,4 +1,5 @@
 export { default as BlockchainForm } from './BlockchainForm';
+export { default as BlockchainTrx } from './BlockchainTrx';
 export { default as Board } from './Board';
 export { default as Card } from './Card';
 export { default as MenuGame } from './MenuGame';

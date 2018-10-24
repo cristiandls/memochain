@@ -5,6 +5,7 @@ export const GET_WEB3 = 'GET_WEB3';
 export const GET_CONTRACT = 'GET_CONTRACT';
 export const SEND_TRX = 'SEND_TRX';
 export const SET_TRX = 'SET_TRX';
+export const SET_SUBMITTING = 'SET_SUBMITTING';
 export const GET_RANKING = 'GET_RANKING';
 
 export const getRanking = () => async (dispatch, getState) => {
@@ -64,7 +65,16 @@ export function setTrx(trx) {
   }
 }
 
+export function setSubmitting(val) {
+  return {
+    type: SET_SUBMITTING,
+    payload: val
+  }
+}
+
 export const sendTrx = (name, email, time, attemps) => async (dispatch) => {
+
+  dispatch(setSubmitting(true));
 
   const apiUrl = process.env.API_URL || 'https://memochain.herokuapp.com'
 
